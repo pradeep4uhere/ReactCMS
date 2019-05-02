@@ -1,0 +1,61 @@
+{
+  "name": "rudra",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "app-root-path": "^2.2.1",
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^3.3.7",
+    "chart.js": "^2.8.0",
+    "cookie-parser": "^1.4.4",
+    "cookie-session": "^1.3.3",
+    "cors": "^2.8.5",
+    "cors-prefetch-middleware": "^1.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
+    "globals": "^11.12.0",
+    "history": "4.7.2",
+    "jquery": "^3.4.0",
+    "jquery-slimscroll": "^1.3.8",
+    "jquery-sparkline": "^2.4.0",
+    "json-stringify": "^1.0.0",
+    "md5": "^2.2.1",
+    "morgan": "^1.9.1",
+    "mysql": "^2.17.1",
+    "node-global-storage": "^1.2.3",
+    "react": "^16.8.*",
+    "react-dom": "^16.8.6",
+    "react-fade-in": "^0.1.6",
+    "react-fastclick": "^3.0.2",
+    "react-redux": "^7.0.2",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.0",
+    "react-switch": "^5.0.0",
+    "reduce-reducers": "^1.0.1",
+    "redux": "^4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.2.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "sha1": "^1.1.1",
+    "sparkline": "^0.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
