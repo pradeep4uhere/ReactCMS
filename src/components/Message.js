@@ -37,6 +37,15 @@ class Message extends React.Component{
           });
         }
 
+
+        if(this.state.title=='info'){
+          this.setState({
+            className:'alert alert-info',
+            iconClass:'fa fa-info',
+            title: 'Info'
+          });
+        }
+
         if(this.state.isShow=="true"){
           this.setState({
             isShow:true,
@@ -50,7 +59,6 @@ class Message extends React.Component{
      let title = this.state.title
      let iconClass =  this.state.iconClass
      let isShow =  this.state.isShow
-     console.log(className);
      return(
       <div>
         {(isShow==true)?(<div><div className={className}><h4><i className={iconClass}></i> {title}:</h4>{Message}</div></div>):('')}

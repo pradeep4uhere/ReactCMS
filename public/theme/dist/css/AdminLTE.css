@@ -4977,3 +4977,11 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+.errorMessage{
+  font-weight: bold;
+  line-height: normal;
+  display: block;
+  width: 322px;
+  text-align: left;
+}

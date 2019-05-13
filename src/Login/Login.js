@@ -5,10 +5,12 @@ import FadeIn from 'react-fade-in';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Constants  from '../config/Constants'
 import $ from 'jquery';
+var sha1 = require('sha1');
 var globals = require('node-global-storage');
 var cors = require('cors');
 const appName = Constants.APP_NAME
 const appTag = Constants.APP_TAG
+const urlStr = Constants.LOGIN_URL;
 class Login extends React.Component{
     constructor(props) {
         super(props);
@@ -28,23 +30,14 @@ class Login extends React.Component{
 
     /**********Login Form Handle********************/
     handleSubmit(event) {
-        let initialUsers = [];
-        var session;
-        var config = {
-           headers: [
-                       "Access-Control-Allow-Origin",
-                       // "Access-Control-Allow-Headers",
-                       // "Origin, X-Requested-With, Content-Type", 
-                       // "CORELATION_ID"
-                    ]
-        };
-        const urlStr = Constants.LOGIN_URL;
         event.preventDefault();
+        var tokenStr = event.target.email_address.value+'|'+event.target.password.value+'|'+Constants.APP_SALT;
         const formData = {
-            username:event.target.email_address.value,
-            password:event.target.password.value
+            username : event.target.email_address.value,
+            password : event.target.password.value,
+            token    : sha1(tokenStr)
         }
-        axios.post(urlStr, formData, config)
+        axios.post(urlStr, formData)
           .then((response) => {
           console.log(response.data);
             if(response.data.code==200) {
@@ -52,6 +45,7 @@ class Login extends React.Component{
               globals.set('user',response.data.user);
               globals.set('token',response.data.token);
               localStorage.setItem('user',response.data.user.id);
+              localStorage.setItem('token',response.data.token);
               this.setState({
                     redirectToReferrer : true,
                     message:response.data.message,
@@ -87,6 +81,7 @@ class Login extends React.Component{
         }else{
           this.setState({ redirectToReferrer: false });    
         }
+        $('#ipl-progress-indicator').hide();
     }
 
    render(){
@@ -119,7 +114,7 @@ class Login extends React.Component{
             <div className="row">
               <div className="col-xs-8">
                 <div className="checkbox icheck">
-                  <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>
                     <input type="checkbox" /> Remember Me
                   </label>
                 </div>
@@ -129,13 +124,7 @@ class Login extends React.Component{
               </div>
             </div>
           </form>
-          <div className="social-auth-links text-center">
-            <p><strong>- OR -</strong></p>
-            <a href="#" className="btn btn-block btn-social btn-facebook btn-flat"><i className="fa fa-facebook" /> Sign in using
-              Facebook</a>
-            <a href="#" className="btn btn-block btn-social btn-google btn-flat"><i className="fa fa-google-plus" /> Sign in using
-              Google+</a>
-          </div>
+          
           <a href="#">I forgot my password ?</a><br />
           <a href="register" className="text-center">Are you arelready register ?</a>
           </div>

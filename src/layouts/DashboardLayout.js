@@ -4,6 +4,12 @@ import Navigation from '../components/Navigation';
 import LeftSideBar from '../components/LeftSideBar/LeftSideBar';
 import DashboardPage from '../components/Page/DashboardPage';
 import SettingPage from '../components/Page/SettingPage';
+import MemberListPage from '../components/Page/MemberListPage';
+import EventListPage from '../components/Page/Event/EventListPage';
+import EventAddPage from '../components/Page/Event/EventAddPage';
+import EventDetailPage from '../components/Page/Event/EventDetailPage';
+import EventGalleryPage from '../components/Page/Event/EventGalleryPage';
+
 class DashboardLayout extends React.Component{
     constructor(props) {
         super(props);
@@ -14,8 +20,13 @@ class DashboardLayout extends React.Component{
     }
     renderSwitch(param) {
       switch(param) {
-        case 'DashboardPage': return '<DashboardPage/>';
-        case 'SettingPage': return '<SettingPage/>';
+        case 'DashboardPage'  : return '<DashboardPage/>';
+        case 'SettingPage'    : return '<SettingPage/>';
+        case 'MemberListPage' : return '<MemberListPage/>';
+        case 'EventListPage'  : return '<EventListPage/>';
+        case 'EventAddPage'   : return '<EventAddPage/>';
+        case 'EventDetailPage': return '<EventDetailPage/>';
+        case 'EventGalleryPage': return '<EventGalleryPage/>';
         default: return '<DashboardPage/>';
       }
     }
@@ -30,11 +41,15 @@ class DashboardLayout extends React.Component{
           <LeftSideBar/> 
           {
             {
-              'DashboardPage': <DashboardPage />,
-              'SettingPage': <SettingPage />,
+              'DashboardPage'   : <DashboardPage  /> ,
+              'SettingPage'     : <SettingPage    /> ,
+              'MemberListPage'  : <MemberListPage /> ,
+              'EventListPage'   : <EventListPage  /> ,
+              'EventAddPage'    : <EventAddPage   /> ,
+              'EventDetailPage' : <EventDetailPage/> ,
+              'EventGalleryPage' : <EventGalleryPage/> ,
             }[this.props.component]
           }
-          
           </div>
         );
     };

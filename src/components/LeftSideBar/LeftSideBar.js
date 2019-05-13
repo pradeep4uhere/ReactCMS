@@ -73,7 +73,7 @@ class LeftSideBar extends React.Component{
               </ul>
             </li>
             <li>
-              <a href="#">
+              <a href="/memberlist">
                 <i className="fa fa-users" />
                 <span>User Manage</span>
                 <span className="pull-right-container">
@@ -90,8 +90,8 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href="#"><i className="fa fa-plus" />Add Event</a></li>
-                <li><a href="#"><i className="fa fa-list" />All Event</a></li>
+                <li><a href="/addevent"><i className="fa fa-plus" />Add Event</a></li>
+                <li><a href="/eventlist"><i className="fa fa-list" />All Event</a></li>
               </ul>
             </li>
             
@@ -104,8 +104,8 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href="pages/charts/chartjs.html"><i className="fa fa-plus" />Add Theatre</a></li>
-                <li><a href="pages/charts/morris.html"><i className="fa fa-list" />All Theatre</a></li>
+                <li><a href="#"><i className="fa fa-plus" />Add Theatre</a></li>
+                <li><a href="#"><i className="fa fa-list" />All Theatre</a></li>
               </ul>
             </li>
             <li>

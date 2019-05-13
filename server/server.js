@@ -23,6 +23,8 @@ app.use(cookieSession({
 const PORT = 4209;
 const cors = require('cors');
 const ServerPortRouter = require('./routes/ServerPortRouter');
+const UserPortRouter = require('./routes/UserPortRouter');
+const EventPortRouter = require('./routes/EventPortRouter');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -30,6 +32,9 @@ app.use(bodyParser.json());
 /**************All Router List Here****************************/
 
 app.use('/serverport', ServerPortRouter);
+app.use('/userport', UserPortRouter);
+app.use('/eventport', EventPortRouter);
+
 
 /**************All Router List Here****************************/
 
