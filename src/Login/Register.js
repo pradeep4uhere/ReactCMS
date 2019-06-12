@@ -166,9 +166,9 @@ class Register extends React.Component{
             <div className="row">
               <div className="col-xs-8">
                 <div className="checkbox icheck">
-                  <label>
+                  <dt>
                     <input type="checkbox"  required id="terms"/> I agree to the <a href="#">Terms & Cond.</a>
-                  </label>
+                  </dt>
                 </div>
               </div>
               <div className="col-xs-4">

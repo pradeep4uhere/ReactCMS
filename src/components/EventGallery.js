@@ -5,8 +5,10 @@ import DashboardLayout from '../layouts/DashboardLayout'
 class EventGallery extends React.Component{
     constructor(props) {
         super(props);
+        const id = props.location.search.slice(1);
         this.state = {
             clicked: false,
+            id:id
         };
     }
 
@@ -23,13 +25,14 @@ class EventGallery extends React.Component{
 
     render(){
     const { isLoggedIn } = this.state
+    const { id } = this.state
     console.log(this.state);
     if (isLoggedIn == false) {
           return <Redirect to='/login'/>;
     }
     return(
           <div>  
-           <DashboardLayout component='EventGalleryPage'/>
+           <DashboardLayout component='EventGalleryPage' id={id}/>
           </div>
         );
     };

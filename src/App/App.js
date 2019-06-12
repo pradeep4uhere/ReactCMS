@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
-import Dashboard from '../components/Dashboard';
-import Setting from '../components/Setting';
-import MemberList from '../components/MemberList';
-import EventList from '../components/EventList';
-import EventAdd from '../components/EventAdd';
-import EventDetail from '../components/EventDetail';
-import EventGallery from '../components/EventGallery';
+import Dashboard      from '../components/Dashboard';
+import Setting        from '../components/Setting';
+import MemberList     from '../components/MemberList';
+import EventList      from '../components/EventList';
+import EventAdd       from '../components/EventAdd';
+import EventEdit      from '../components/EditEvent';
+import EventDetail    from '../components/EventDetail';
+import EventGallery   from '../components/EventGallery';
+
+
+import PageList       from '../components/PageList';
+import PageEdit       from '../components/EditPage';
+
+import Theatre        from '../components/Theatre';
+import AddTheatre     from '../components/AddTheatre';
+import EditTheatre    from '../components/EditTheatre';
+import AddTheatreSeat from '../components/AddTheatreSeat';
+
+import LocationTab    from '../components/LocationTab';
+import EventTimingTab from '../components/EventTimingTab';
+
+import SittingType    from '../components/SittingType';
+import SittingList    from '../components/SittingList';
+import SittingEdit    from '../components/SittingEdit';
+
+import ViedoList from '../components/ViedoList';
+
+
 import Login, {user} from '../Login/Login';
 import Logout from '../Logout';
 import NotFound from '../components/NotFound';
 import Register from '../Login/Register';
+import Index from '../components/Index';
 import $ from 'jquery';
-
 class App extends Component {
   	constructor() {
   		super();
@@ -50,18 +71,36 @@ render() {
       <div>
          <Router>
           <Switch>
-              <Route path="/" component={Dashboard} exact/>
+              {/* <Route path="/" component={Dashboard} exact/> */}
               <Route path="/setting" component={Setting} exact />
               <Route path="/dashboard" component={Dashboard}  />
               <Route path="/memberlist" component={MemberList}  />
               <Route path="/memberlist/{:page}" component={MemberList}  />
 
+              <Route path="/sittingtype" component={SittingType}  />
+              <Route path="/sittinglist" component={SittingList}  />
+              <Route path="/editsitting/:id?" component={SittingEdit}/>
+
               <Route path="/eventlist" component={EventList}  />
               <Route path="/addevent" component={EventAdd}  />
               <Route path="/eventdetails" component={EventDetail}/>
-              <Route path="/eventgallery" component={EventGallery}/>
+              <Route path="/eventgallery/:id?" component={EventGallery}/>
 
+              <Route path="/alltheatre" component={Theatre}/>
+              <Route path="/addtheatre" component={AddTheatre}/>
+              <Route path="/edittheatre/:id?" component={EditTheatre}/>
+              <Route path="/addseat/:id?" component={AddTheatreSeat}/>
 
+              <Route path="/eventlocation/:id?" component={LocationTab}/>
+              <Route path="/eventtiming/:id?" component={EventTimingTab}/>
+              <Route path="/editevent/:id?" component={EventEdit}/>
+
+              <Route path="/allpagelist" component={PageList}  />
+              <Route path="/editpage/:id?" component={PageEdit}/>
+
+              <Route path="/allviedos" component={ViedoList}  />
+
+              <Route path="/" component={Index} exact/>
               <Route path="/logout" component={Logout} exact/>
               <Route path="/login" component={Login} exact/>
               <Route path="/register" component={Register} exact/>

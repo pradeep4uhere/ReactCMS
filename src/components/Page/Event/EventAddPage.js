@@ -5,9 +5,6 @@
  * @Created Date:: 09 May 2019
  */
 import React from 'react';
-import axios from 'axios'
-import Constants  from '../../../config/Constants'
-import $ from 'jquery';
 import EventForm from '../Event/EventForm';
 import Breadcrum from '../../BreadcrumPage';
 class EventAddPage extends React.Component{

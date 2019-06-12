@@ -8,10 +8,19 @@ var fs = require('fs');
 var appRoot = require('app-root-path');
 const request = require('request-promise');
 var urlConstant = require('../module/urlConstant');
-const LIST_API_REQUEST 		= urlConstant.EVENT_LIST_API_REQUEST;
-const UPDATE_API_REQUEST    = urlConstant.EVENT_UPDATE_API_REQUEST;
-const ADD_API_REQUEST       = urlConstant.EVENT_ADD_API_REQUEST;
-const DETAILS_API_REQUEST   = urlConstant.EVENT_DETAILS_API_REQUEST;
+const LIST_API_REQUEST 		        = urlConstant.EVENT_LIST_API_REQUEST;
+const UPDATE_API_REQUEST            = urlConstant.EVENT_UDPATE_API_POST;
+const ADD_API_REQUEST               = urlConstant.EVENT_ADD_API_REQUEST;
+const DETAILS_API_REQUEST           = urlConstant.EVENT_DETAILS_API_REQUEST;
+const EVENT_BANNER_API_POST         = urlConstant.EVENT_BANNER_API_POST;
+const EVENT_DETAILS_API_POST        = urlConstant.EVENT_DETAILS_API_POST;
+const EVENT_SAVE_DETAILS_API_POST   = urlConstant.EVENT_SAVE_DETAILS_API_POST;
+const EVENT_GET_DETAILS_API_POST    = urlConstant.EVENT_GET_DETAILS_API_POST;
+const EVENT_TIMING_UPDATE_API_POST  = urlConstant.EVENT_TIMING_UPDATE_API_POST;
+const EVENT_TIMING_DELETE_API_POST  = urlConstant.EVENT_TIMING_DELETE_API_POST;
+const EVENT_IMAGE_UPLOAD_API_POST   = urlConstant.EVENT_IMAGE_UPLOAD_API_POST;
+const EVENT_BANNER_UPLOAD_API_POST  = urlConstant.EVENT_BANNER_UPLOAD_API_POST;
+
 /**************EVENT List API Start Here**********************************/
 EventPortRouter.route('/geteventlist').post(function (req, res,next) {
     var token        	= req.body.token;
@@ -124,6 +133,329 @@ EventPortRouter.route('/geteventdetails').post(function (req, res,next) {
 	        console.log(err)
 	})
 });
+
+
+/**************GET EVENT DETAILS API Start Here**********************************/
+EventPortRouter.route('/eventsavebanner').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var event_id       = req.body.event_id;
+    var postData ={
+        token	    : token,
+        id          : event_id
+    }
+    const options = {
+            method: 'POST',
+            uri: EVENT_BANNER_API_POST,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('========================================================');
+    console.log('======================Post Data=========================');
+    console.log(options);
+    console.log('========================================================');
+    
+    request(options)
+	    .then(function (response) {
+            console.log('========================================================');
+            console.log('===================Response Data========================');
+            console.log(response)
+            console.log('========================================================');
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+
+/**************GET EVENT DETAILS API Start Here**********************************/
+EventPortRouter.route('/saveeventdetails').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var event_id        = req.body.event_id;
+    var language        = req.body.language;
+    var country         = req.body.country;
+    var state           = req.body.state;
+    var city            = req.body.city;
+
+    var postData ={
+            token	    : token,
+            event_id    : event_id,
+            language    : language,
+            country     : country,
+            state       : state,
+            city        : city,
+    }
+    const options = {
+            method: 'POST',
+            uri: EVENT_SAVE_DETAILS_API_POST,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('======================Post Data=========================');
+    console.log(options);
+    
+    request(options)
+	    .then(function (response) {
+            console.log('===================Response Data========================');
+            console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+
+
+/**************GET EVENT DETAILS API Start Here**********************************/
+EventPortRouter.route('/geteventlocation').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var event_id        = req.body.event_id;
+
+    var postData ={
+            token	    : token,
+            event_id    : event_id,
+    }
+    const options = {
+            method: 'POST',
+            uri: EVENT_GET_DETAILS_API_POST,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('======================Post Data=========================');
+    console.log(options);
+    
+    request(options)
+	    .then(function (response) {
+            console.log('===================Response Data========================');
+            console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+
+
+/**************GET EVENT Timing Update API Start Here**********************************/
+EventPortRouter.route('/eventtimingupdate').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var id              = req.body.id;
+    var event_id        = req.body.event_detail_id;
+    var theater_id      = req.body.theater_id;
+    var event_start_time= req.body.event_start_time;
+    var event_end_time  = req.body.event_end_time;
+    var status          = req.body.status;
+
+    var postData ={
+            token	        : token,
+            id              : id,
+            event_id        : event_id,
+            theater_id      : theater_id,
+            event_start_time: event_start_time,
+            event_end_time  : event_end_time,
+            status          : status
+    }
+    const options = {
+            method: 'POST',
+            uri: EVENT_TIMING_UPDATE_API_POST,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('======================Post Data=========================');
+    console.log(options);
+    
+    request(options)
+	    .then(function (response) {
+            console.log('===================Response Data========================');
+            console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+
+
+/**************GET EVENT Timing delete API Start Here**********************************/
+EventPortRouter.route('/eventtimingdelete').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var id              = req.body.id;
+    var postData ={
+            token	        : token,
+            id              : id,
+    }
+    const options = {
+            method: 'POST',
+            uri: EVENT_TIMING_DELETE_API_POST,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('======================Post Data=========================');
+    console.log(options);
+    
+    request(options)
+	    .then(function (response) {
+            console.log('===================Response Data========================');
+            console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+EventPortRouter.route('/updateevent').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var id        	    = req.body.event.id;
+    var title        	= req.body.event.title;
+    var description     = req.body.event.description;
+    var durration       = req.body.event.durration;
+    var status          = req.body.event.status;
+    var postData ={
+            id          : id,
+            title       : title,
+            description : description,
+            durration   : durration,
+            status      : status,
+            token	    : token,
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    console.log('======================Post Data=========================');
+    const options = {
+        method: 'POST',
+        uri: UPDATE_API_REQUEST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    //console.log(err)
+	})
+});
+
+
+
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+EventPortRouter.route('/uploadimage').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var imageStr   	    = req.body.imageStr;
+    var postData ={
+            id          : id,
+            token	    : token,
+            imageStr    : imageStr
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: EVENT_IMAGE_UPLOAD_API_POST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
+
+
+
+
+
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+EventPortRouter.route('/eventbannerupload').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var imageStr   	    = req.body.imageStr;
+    var postData ={
+            id          : id,
+            token	    : token,
+            imageStr    : imageStr
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: EVENT_BANNER_UPLOAD_API_POST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 

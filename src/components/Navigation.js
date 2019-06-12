@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect,withRouter } from 'react-router-dom'
 import Constants  from '../config/Constants'
 const userProfileImg = Constants.IMG.USER_PROFILE
 const appName = Constants.APP_NAME

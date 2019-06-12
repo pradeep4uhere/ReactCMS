@@ -13,21 +13,8 @@ import Modal from 'react-modal';
 import UserViewPage from '../Page/User/UserViewPage';
 import UserEditPage from '../Page/User/UserEditPage';
 
-const appName   = Constants.APP_NAME
-const appTag    = Constants.APP_TAG
 const urlStr    = Constants.USER_LIST_URL;
 const token     = localStorage.getItem('token');
-const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
-  };
- 
 class LatestMemberList extends React.Component{
     constructor(props) {
         super(props);

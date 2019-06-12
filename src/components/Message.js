@@ -21,7 +21,7 @@ class Message extends React.Component{
 
 
     componentDidMount(){
-       if(this.state.title=='success'){
+       if(this.state.title==='success'){
           this.setState({
             className:'alert alert-success',
             iconClass:'fa fa-check',
@@ -29,7 +29,7 @@ class Message extends React.Component{
           });
        }
 
-        if(this.state.title=='error'){
+        if(this.state.title==='error'){
           this.setState({
             className:'alert alert-danger',
             iconClass:'fa fa-ban',
@@ -38,7 +38,7 @@ class Message extends React.Component{
         }
 
 
-        if(this.state.title=='info'){
+        if(this.state.title==='info'){
           this.setState({
             className:'alert alert-info',
             iconClass:'fa fa-info',
@@ -46,7 +46,7 @@ class Message extends React.Component{
           });
         }
 
-        if(this.state.isShow=="true"){
+        if(this.state.isShow==="true"){
           this.setState({
             isShow:true,
           });

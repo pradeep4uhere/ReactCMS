@@ -7,7 +7,6 @@
 import React from 'react';
 import axios from 'axios'
 import Constants  from '../../../config/Constants'
-import $ from 'jquery';
 import Message from '../../../components/Message';
 const urlStr = Constants.EVENT_ADD_URL;
 const token     = localStorage.getItem('token');
@@ -130,11 +129,11 @@ class EventAddPage extends React.Component{
                 <form role="form" onSubmit={this.handleSubmit} enctype="multipart/form-data" id="form-event">
                     <div className="box-body">
                     <div className={"form-group"+" "+hasTError}>
-                        <label htmlFor="exampleInputEmail1">Event Title</label>
+                        <dt>Event Title</dt>
                         <input type="text" className="form-control" id="title" placeholder="Enter event title" />
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
-                        <label htmlFor="exampleInputPassword1">Description</label>
+                        <dt htmlFor="exampleInputPassword1">Description</dt>
                         <textarea id="description" name="description" rows="10" cols="80"  className="form-control">
                             Enter Description of the event
                         </textarea>
@@ -142,7 +141,7 @@ class EventAddPage extends React.Component{
                 
                     <div className="bootstrap-timepicker">
                     <div className={"form-group"+" "+hasDError}>
-                    <label>Event Durration:</label>
+                    <dt>Event Durration:</dt>
                     <small>Total durration of the event in minutes only</small>
                     <div className="input-group">
                         <input type="text" class="form-control timepicker" id="durration" name="durration"/>
@@ -153,12 +152,12 @@ class EventAddPage extends React.Component{
                     </div>
                     </div>   
                     <div className="form-group">
-                        <label htmlFor="exampleInputFile">Event Banner</label>
+                        <dt htmlFor="exampleInputFile">Event Banner</dt>
                         <input type="file" id="event_banner" name="event_banner" />
                         <p className="help-block">(only jpeg, jpg, png, gif file extenstion allowd).</p>
                     </div>
                     <div className={"form-group"+" "+hasSError}>
-                    <label htmlFor="inputEmail3">Status</label>
+                    <dt htmlFor="inputEmail3">Status</dt>
                             <select className="form-control" id="status">
                                 <option value="1">Active</option>
                                 <option value="0">In Active</option>

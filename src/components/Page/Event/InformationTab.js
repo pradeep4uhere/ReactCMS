@@ -69,7 +69,6 @@ class InformationTab extends React.Component{
       const { event } =  this.state;
       let eventDetails = event.event_detail;
       let detailsTimings = '';
-      console.log(eventDetails);
       let detailsLocation = eventDetails.map((val,i) =>
           <div className="box-body">
           <dl>

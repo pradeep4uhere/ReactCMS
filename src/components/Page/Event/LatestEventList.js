@@ -13,23 +13,9 @@ import $ from 'jquery';
 import Modal from 'react-modal';
 import EventViewPage from '../../Page/Event/EventViewPage';
 import UserEditPage from '../../Page/User/UserEditPage';
-import ReactTooltip from 'react-tooltip'
-
-const appName   = Constants.APP_NAME
-const appTag    = Constants.APP_TAG
+// import ReactTooltip from 'react-tooltip'
 const urlStr    = Constants.EVENT_LIST_URL;
 const token     = localStorage.getItem('token');
-const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
-  };
- 
 class LatestEventList extends React.Component{
     constructor(props) {
         super(props);
@@ -55,7 +41,7 @@ class LatestEventList extends React.Component{
         this.closeModal         = this.closeModal.bind(this);
 
         this.stripHtml          = this.stripHtml.bind(this);
-        this.handleRouteClick   =   this.handleRouteClick.bind(this);
+        this.handleRouteClick   = this.handleRouteClick.bind(this);
  
     }
 
@@ -188,15 +174,17 @@ class LatestEventList extends React.Component{
             <td><a href="#" title="Click to Add Details" onClick={this.handleRouteClick} id={val.id+'|details'}>{val.title}</a></td>
             <td>{val.durration} Min</td>
             <td><a data-tip={this.stripHtml(val.description)}>{this.stripHtml(val.description).substring(0,100)}</a>
-                <ReactTooltip className='extraClass'  delayHide={500} type="success" effect="solid"/>
+                {/* <ReactTooltip className='extraClass'  delayHide={500} type="success" effect="solid"/> */}
             </td>
             <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
             <td>{val.created_at}</td>
             <td>
-                <a href="#" onClick={this.openModal} id={val.id+'|view'}>View</a> | 
-                <a href="#" onClick={this.handleRouteClick} id={val.id+'|gallery'}>Gallery</a> | 
-                <a href="#" onClick={this.openModal} id={val.id+'|'+'edit'}>Edit</a> | 
-                <a href="#">Delete</a></td>
+                <a href={"eventdetails?"+val.id} onClick={this.openModal} id={val.id+'|view'}><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                <a href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                <a href={"eventgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                <a href={"eventtiming?"+val.id}><i className="fa fa-clock-o"></i></a>&nbsp;&nbsp;
+                <a href={"editevent?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                <a href="#"><i className="fa fa-trash"></i></a></td>
         </tr>
         );
         if (redirectToReferrer === true) {

@@ -22,17 +22,29 @@ class LeftSideBar extends React.Component{
           {/* Sidebar user panel */}
           <div className="user-panel">
             <div className="pull-left image">
-              <img src={userProfileImg} className="img-circle" alt="User Image" />
+              <img src={userProfileImg} className="img-circle" alt="User" />
             </div>
             <div className="pull-left info">
               <p>Welcome, Admin</p>
-              <a href="#"><i className="fa fa-circle text-success" /> Online</a>
+              <a href="#"><i className="fa fa-circle text-success"></i>Online</a>
             </div>
           </div>
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
-            <li><a href="/dashboard"><i className="fa fa-dashboard" /> Dashboard</a></li>
-            <li><a href="/setting"><i className="fa fa-cogs" />General Setting</a></li>
+            <li>
+              <a href="/dashboard">
+                <i className="fa fa-dashboard" />
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/setting">
+                <i className="fa fa-gear" />
+                <span>General Setting</span>
+              </a>
+            </li>
+
+
             <li className="treeview menu-open">
               <a href="#">
                 <i className="fa fa-gear" /> <span>Global Managment</span>
@@ -41,11 +53,11 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href="#"><i className="fa fa-wheelchair" />Sitting Type</a></li>
-                <li><a href="#"><i className="fa fa-scissors" />Offers Type</a></li>
-                <li><a href="#"><i className="fa fa-globe" />Tax Type</a></li>
+                <li><a href="sittingtype"><i className="fa fa-wheelchair"/>Sitting Type</a></li>
+                <li><a href="#"><i className="fa fa-scissors"/>Offers Type</a></li>
+                <li><a href="#"><i className="fa fa-globe"/>Tax Type</a></li>
                 <li><a href="#"><i className="fa fa-calendar-check-o" />Booking Status</a></li>
-                <li><a href="#"><i className="fa fa-language" />Language Type</a></li>
+                <li><a href="#"><i className="fa fa-language"/>Language Type</a></li>
               </ul>
             </li>
              <li className="treeview menu-open">
@@ -69,7 +81,7 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href="#"><i className="fa fa-list" />All Pages</a></li>
+                <li><a href="allpagelist"><i className="fa fa-list" />All Pages</a></li>
               </ul>
             </li>
             <li>
@@ -104,8 +116,8 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href="#"><i className="fa fa-plus" />Add Theatre</a></li>
-                <li><a href="#"><i className="fa fa-list" />All Theatre</a></li>
+                <li><a href="addtheatre"><i className="fa fa-plus" />Add Theatre</a></li>
+                <li><a href="alltheatre"><i className="fa fa-list" />All Theatre</a></li>
               </ul>
             </li>
             <li>
@@ -113,6 +125,14 @@ class LeftSideBar extends React.Component{
                 <i className="glyphicon glyphicon-calendar" /> <span>Event Booking</span>
                 <span className="pull-right-container">
                   <small className="label pull-right bg-green">101</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="allviedos">
+                <i className="glyphicon glyphicon-calendar" /> <span>Review Viedos</span>
+                <span className="pull-right-container">
+                  <small className="label pull-right bg-green">01</small>
                 </span>
               </a>
             </li>

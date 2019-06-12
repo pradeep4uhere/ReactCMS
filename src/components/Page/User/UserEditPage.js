@@ -9,7 +9,6 @@ import React from 'react';
 import axios from 'axios'
 import Constants  from '../../../config/Constants'
 import $ from 'jquery';
-import Message from '../../../components/Message';
 const urlStr = Constants.USER_UPDATE_URL;
 const token     = localStorage.getItem('token');
 class UserEditPage extends React.Component{
@@ -123,31 +122,31 @@ class UserEditPage extends React.Component{
                 <form className="form-horizontal" onSubmit={this.handleEditSubmit} id="login-form" >
                     <div className="box-body">
                     <div className="form-group">
-                        <label htmlFor="inputEmail3" className="col-sm-3 control-label">First Name</label>
+                        <dt htmlFor="inputEmail3" className="col-sm-3 control-label">First Name</dt>
                         <div className="col-sm-9">
                         <input type="text" className="form-control" id="first_name" placeholder="Enter first name" value={this.state.first_name} onChange = { this.handleChange.bind(this)}/>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputEmail3" className="col-sm-3 control-label">Last Name</label>
+                        <dt htmlFor="inputEmail3" className="col-sm-3 control-label">Last Name</dt>
                         <div className="col-sm-9">
                         <input type="text" className="form-control" id="last_name" placeholder="Enter last name" value={this.state.last_name} onChange = { this.handleChange.bind(this)}/>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputEmail3" className="col-sm-3 control-label">Username</label>
+                        <dt htmlFor="inputEmail3" className="col-sm-3 control-label">Username</dt>
                         <div className="col-sm-9">
                         <input type="text" className="form-control" id="username" placeholder="Enter username" value={this.state.username} onChange = { this.handleChange.bind(this)}/>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputEmail3" className="col-sm-3 control-label">Email Address</label>
+                        <dt htmlFor="inputEmail3" className="col-sm-3 control-label">Email Address</dt>
                         <div className="col-sm-9">
                         <input type="email" className="form-control" id="email" placeholder="Enter email address" value={this.state.email} onChange = { this.handleChange.bind(this)}/>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputEmail3" className="col-sm-3 control-label">Status</label>
+                        <dt htmlFor="inputEmail3" className="col-sm-3 control-label">Status</dt>
                         <div className="col-sm-9">
                             <select className="form-control" id="status" onChange = { this.handleChange.bind(this)}>
                                 <option value="1">Active</option>

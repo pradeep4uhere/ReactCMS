@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect,withRouter } from 'react-router-dom'
+import React from 'react';
+import { Redirect } from 'react-router-dom'
 class Logout extends React.Component {
     constructor() {
         super();

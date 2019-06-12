@@ -14,7 +14,7 @@ class NotFound extends React.Component{
             404 Error Page
           </h1>
           <ol className="breadcrumb">
-            <li><a href="#"><i className="fa fa-dashboard" /> Home</a></li>
+            <li><i className="fa fa-dashboard" /> Home</li>
             <li className="active">404 error</li>
           </ol>
         </section>

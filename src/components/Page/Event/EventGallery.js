@@ -4,7 +4,7 @@
  * @Description :: This component used for add new event 
  * @Created Date:: 09 May 2019
  */
-import React from 'react';
+import React , {useCallback} from 'react';
 import axios from 'axios'
 import {browserHistory} from 'react-router';
 import Constants  from '../../../config/Constants'
@@ -14,6 +14,39 @@ import Breadcrum from '../../BreadcrumPage';
 //import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import Gallery from 'react-grid-gallery';
+import {useDropzone} from 'react-dropzone'
+import DropzoneComponent from 'react-dropzone-component';
+import "../../../../node_modules/react-dropzone-component/styles/filepicker.css";
+import "../../../../node_modules/dropzone/dist/min/dropzone.min.css";
+const urlSaveImgStr = Constants.EVENT_SAVE_BANNER_API_POST;
+const token     = localStorage.getItem('token');
+var ReactDOMServer = require('react-dom/server');
+var componentConfig = {
+    iconFiletypes: ['.jpg', '.png', '.gif'],
+    showFiletypeIcon: true,
+    postUrl: '/'+urlSaveImgStr,
+    params: {
+        token: token
+      },
+};
+var djsConfig = {
+  addRemoveLinks: true,
+  autoProcessQueue: false,
+ 
+}
+var eventHandlers = { addedfile: (file) => console.log(file) }
+var callbackArray = [
+    function () {
+        console.log('Look Ma, I\'m a callback in an array!');
+    },
+    function () {
+        console.log('Wooooow!');
+    }
+];
+
+var simpleCallBack = function () {
+    console.log('I\'m a simple callback');
+};
 
 class EventGallery extends React.Component{
     constructor(props) {
@@ -25,6 +58,9 @@ class EventGallery extends React.Component{
 
         };
     }
+
+
+    
     render(){
         const images = [
             {
@@ -55,7 +91,7 @@ class EventGallery extends React.Component{
                     thumbnail: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_n.jpg",
                     thumbnailWidth: 320,
                     thumbnailHeight: 212,
-                    tags: [{value: "Ocean", title: "Ocean"}, {value: "People", title: "People"}],
+                    tags: [{value: "Ocean", title: "Ocean"}, {value: "Peoplesss", title: "People"}],
                     caption: "Boats (Jeshu John - designerspics.com)"
             },
 
@@ -264,10 +300,13 @@ class EventGallery extends React.Component{
         caption: "A photo by 贝莉儿 NG. (unsplash.com)"
     }
         ]
-       
+        
         return(
             <div className="row">
             <div className="col-md-12">
+            <DropzoneComponent config={componentConfig}
+                       eventHandlers={eventHandlers}
+                       djsConfig={djsConfig} />,
                 <Gallery images={IMAGES}/>
                 {/* <ImageGallery items={images} /> */}
             </div>

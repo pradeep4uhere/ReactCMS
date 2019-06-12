@@ -114,9 +114,9 @@ class Login extends React.Component{
             <div className="row">
               <div className="col-xs-8">
                 <div className="checkbox icheck">
-                  <label>
+                  <dt>
                     <input type="checkbox" /> Remember Me
-                  </label>
+                  </dt>
                 </div>
               </div>
               <div className="col-xs-4">

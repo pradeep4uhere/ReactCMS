@@ -7,7 +7,6 @@
 import React from 'react';
 import axios from 'axios'
 import Constants  from '../../../config/Constants'
-import Message from '../../../components/Message';
 
 const urlStr = Constants.EVENT_ADD_URL;
 const token     = localStorage.getItem('token');
