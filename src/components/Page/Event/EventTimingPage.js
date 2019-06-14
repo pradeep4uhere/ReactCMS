@@ -13,6 +13,8 @@ import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import DeleteImg from '../../../theme/dist/img/recycle.png';
 import DoneImg from '../../../theme/dist/img/done.png';
+import SittingType from '../../../json/SittingType';
+var serialize = require('form-serialize');
 
 const showSecond = true;
 const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
@@ -42,7 +44,17 @@ class EventTimingPage extends React.Component{
           sAText:'',
           sAImg:DoneImg,
           showCancelButton:true,
-          confirmButtonColor:'#FF0000'
+          confirmButtonColor:'#FF0000',
+          priceObj: {
+                  sitting_type_id : '',
+                  price           : '',
+          },
+          priceRow:[{
+            sitting_type_id : '',
+            price           : '',
+          }],
+          SittingType : SittingType,
+          showRemoveBtn:false
         };
         this.getEventDetails  = this.getEventDetails.bind(this);
         this.getTheatreList   = this.getTheatreList.bind(this);
@@ -50,8 +62,20 @@ class EventTimingPage extends React.Component{
         this.EditTime         = this.EditTime.bind(this);
         this.DeleteTime       = this.DeleteTime.bind(this);
         this.DeleteNow        = this.DeleteNow.bind(this);
+        this.addRow           = this.addRow.bind(this);
+        this.removeRow        = this.removeRow.bind(this);
+        this.handleChange     = this.handleChange.bind(this);
     }
 
+    handleChange(e) {
+      let data = this.state.priceRow;
+      let idStr = e.target.id.split("__");
+      data[idStr[1]][idStr[0]] = e.target.value;;
+      this.setState({
+        priceRow : data
+      });
+      console.log(this.state.priceRow);
+    }
 
     getTheatreList(){
         var tokenStr = token;
@@ -103,6 +127,10 @@ class EventTimingPage extends React.Component{
                 event_detail: response.data[0].data.event_detail,
                 isOverlay  : false
             });
+            // this.state.priceRow.push({
+            //   sitting_type_id : '',
+            //   price           : '',
+            // });
             if(response.data[0].data.event_detail.length==0){
               this.setState({
                 noRecords:true
@@ -124,7 +152,7 @@ class EventTimingPage extends React.Component{
           this.setState({isMsg:true});
           this.setState({className:'error'});
       })
-  }
+    }
     
     componentDidMount(){
       this.getTheatreList();
@@ -143,6 +171,8 @@ class EventTimingPage extends React.Component{
       var event_end_time  = event.target.event_end_time.value;
       var status          = event.target.status.value;
       var event_id        = this.props.id;
+      const form = event.currentTarget
+      const body = serialize(form, {hash: true,empty:true})
       const formData = {
           token           : tokenStr,
           event_id        : event_id,
@@ -152,6 +182,7 @@ class EventTimingPage extends React.Component{
           event_detail_id : event_detail_id,
           status          : status,
           id              : id,
+          body            : body
       }
       axios.post(urlEventTimeUpdate, formData)
       .then((response) => {
@@ -181,22 +212,23 @@ class EventTimingPage extends React.Component{
     }
 
     //Open Modle box for user Either we can view or edit the user details here
-    EditTime(e) {
-      var strId   = e.target.id;
-      var array   = strId.split("|");
-      var event_detail_id  = array[0];
-      var theatre_id  = array[1];
-      var event_start_time  = array[2];
-      var event_end_time  = array[3];
-      var status  = array[4];
-      var id  = array[5];
-      $('#event_detail_id').val(event_detail_id);
-      $('#theatre_id').val(theatre_id);
-      $('#event_start_time').val(event_start_time);
-      $('#event_end_time').val(event_end_time);
-      $('#status').val(status);
-      $('#id').val(id);
-  }
+    EditTime(e,obj) {
+      $('#event_detail_id').val(obj.event_detail_id);
+      $('#theatre_id').val(obj.theatre_id);
+      $('#event_start_time').val(obj.event_start_time);
+      $('#event_end_time').val(obj.event_end_time);
+      $('#status').val(obj.status);
+      $('#id').val(obj.id);
+      //Update the Price Object
+      var price = obj.price;
+      this.state.priceRow =[];
+      price.map((val,i)=>
+        this.state.priceRow.push({
+          sitting_type_id : val.sitting_type_id,
+          price           : val.price,
+        })
+      )
+    }
 
 
 
@@ -266,6 +298,30 @@ class EventTimingPage extends React.Component{
       })
     }
 
+    addRow(){
+      if(this.state.priceRow.length<=(this.state.SittingType.length-1)){
+        console.log("============================");
+        let priceObj = {sitting_type_id : '', price : ''};
+        console.log(this.state.priceRow);
+        console.log(priceObj);
+        this.state.priceRow.push(priceObj)
+        console.log(this.state.priceRow);
+      }else{
+        this.setState({
+          message     : "No more seat type availabe.",
+          classstr    : 'alert alert-danger',
+          className   : 'error',
+          isMsg       : true,
+         });
+      }
+    }
+
+
+    removeRow(){
+      if(this.state.priceRow.length>1){
+          this.state.priceRow.pop()
+      }
+    }
 
 
     
@@ -278,6 +334,7 @@ class EventTimingPage extends React.Component{
       const { event_detail }  = this.state;
       const { isOverlay }     = this.state;
       const { noRecords }     = this.state;
+     
       // alert(this.state.noRecords);
       console.log("======================+render=================");
       console.log(this.state.event_detail);
@@ -285,14 +342,28 @@ class EventTimingPage extends React.Component{
         let timingOption = this.state.event_detail.map((val,i) =>
             val.event_timing.map((key,k)=> 
             <tr>
-              <td>{k+1}</td>
-              <td>{key.theatre.theater_name}</td>
-              <td>{key.theatre.address}</td>
+              <td width="1%">{k+1}</td>
+              <td width="20%">{key.theatre.theater_name}</td>
+              <td width="30%">{key.theatre.address}</td>
+              <td nowrap="nowrap"><table>
+                  <tr className="table-info">
+                    <td>Type</td>
+                    <td>Price</td>
+                  </tr>
+                {key.price.map(j => {
+                  return (
+                      <tr>
+                        <td>{j.sitting_type.sitting_type_name}</td>
+                        <td><i className="fa fa-inr"></i>{j.price}</td>
+                      </tr>
+                  )
+                
+              })}</table></td>
               <td>{key.event_start_time}</td>
               <td>{key.event_end_time}</td>
               <td>{(key.status==1)?(<span className="badge bg-green">Active</span>):(<span className="badge bg-red">In Active</span>)}</td>
               <td>
-                <a href="#"><i className="fa fa-pencil" onClick={this.EditTime} id={key.event_detail_id+'|'+key.theatre.id+'|'+key.event_start_time+'|'+key.event_end_time+'|'+key.status+'|'+key.id}></i></a>&nbsp;&nbsp;
+                <a href="#"><i className="fa fa-pencil" onClick={((e) => this.EditTime(e, key))}></i></a>&nbsp;&nbsp;
                 <a href="#"><i className="fa fa-trash" onClick={this.DeleteTime} id={key.id}></i></a>
               </td>
             </tr>
@@ -307,7 +378,41 @@ class EventTimingPage extends React.Component{
       let theatreListOption = this.state.theater.map((val,i) =>
         <option value={val.id}>{val.theater_name}</option>
       );
-        return(
+
+      let sittingTypeOption = this.state.SittingType.map((val,i) =>
+          <option value={val.id}>{val.sitting_type_name}</option>
+      );
+
+      let priceRowElement =  this.state.priceRow.map((val,i) =>
+            <div>
+            <div className="col-md-6">
+              <div className={"form-group"}>
+              < dt>Sitting Type:</dt>
+                <div className="input-group">
+                  <select class="form-control" name="sitting_type_id[]" id={"sitting_type_id__"+i} style={{height: '28px'}} value={val.sitting_type_id} onChange = { this.handleChange.bind(this)}>
+                  {sittingTypeOption}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className={"form-group"}>
+                <dt>Price:</dt>
+                <div className="input-group">
+                  <div className="input-group-addon">
+                      <i className="fa fa-inr"></i>
+                  </div>
+                  <input type="text" class="form-control" name="price[]" id={"price__"+i} style={{height: '28px'}} value={val.price} onChange = { this.handleChange.bind(this)}/>
+                </div>
+              </div>
+            </div>
+            </div>
+      );
+
+      let { showRemoveBtn } = this.state
+
+      return(
+
             <div className="content-wrapper">
             <Breadcrum title="Edit Event Timing" titleRight='All Event List' url='eventlist' />
             <SweetAlert
@@ -330,7 +435,7 @@ class EventTimingPage extends React.Component{
             <div className="box box-solid">
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
               <div className="box-header with-border">
-                <i className="fa fa-text-width" />
+                <i className="fa fa-clock-o" />
                 <h3 className="box-title">Event Timing List</h3>
               </div>
               <div className="box-body no-padding">
@@ -339,6 +444,7 @@ class EventTimingPage extends React.Component{
                   <th>#</th>
                   <th>Theater Name</th>
                   <th>Address</th>
+                  <th>Sitting Type / Price</th>
                   <th style={{'white-space':'nowrap'}}>Start Time</th>
                   <th style={{'white-space':'nowrap'}}>End Time</th>
                   <th>Status</th>
@@ -353,7 +459,7 @@ class EventTimingPage extends React.Component{
             <div className="col-md-4">
             <div className="box box-solid">
               <div className="box-header with-border">
-                <i className="fa fa-text-width" />
+                <i className="fa fa-pencil" />
                 <h3 className="box-title">Update Event Timing</h3>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
@@ -373,7 +479,8 @@ class EventTimingPage extends React.Component{
                          { theatreListOption }
                         </select>
                     </div>
-                    <div className="bootstrap-timepicker col-md-12">
+                    
+                    <div className="bootstrap-timepicker col-md-6">
                     <div className={"form-group"}>
                     <dt>Event Start time:</dt>
                     <small>Total durration of the event in minutes only</small>
@@ -385,7 +492,7 @@ class EventTimingPage extends React.Component{
                     </div>
                     </div>
                     </div>
-                    <div className="bootstrap-timepicker col-md-12">
+                    <div className="bootstrap-timepicker col-md-6">
                     <div className={"form-group"}>
                     <dt>Event End Time:</dt>
                     <small>Total durration of the event in minutes only</small>
@@ -404,12 +511,23 @@ class EventTimingPage extends React.Component{
                         <option value="1">Active</option>
                         <option value="0">In Active</option>
                         </select>
-                    </div>                    
+                    </div>  
+                    {priceRowElement}
+                    <div className="col-md-12">
+                    <div className={"form-group"}>
+                    <dt className="pull-right" show={this.state.showRemoveBtn}>
+                    <a href="#" id="removeBtn"  onClick={((e) => this.removeRow(e))}><i className="fa fa-trash"></i>&nbsp;Remove Price</a>
+                    </dt>
+                    <dt className="pull-left">                      
+                    <a href="#" id="addBtn" onClick={((e) => this.addRow(e))}><i className="fa fa-plus"></i>&nbsp;Add Price</a>
+                    </dt>
+                    </div>
+                    </div>
                 </div>
                 <div class="box-footer">
                 <input type="hidden" id="id"  class="form-control" />
                 <button type="submit" class="btn btn-primary  pull-right">Submit</button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-warning  pull-right" style={{"margin-right":"5px"}}>Reset</button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-warning  pull-right" style={{"margin-right":"5px"}} >Reset</button>&nbsp;&nbsp;
                 </div>
                 </form>
                 </div>
@@ -420,6 +538,7 @@ class EventTimingPage extends React.Component{
             </section>
             </div>
             )
+            
     };
 
 

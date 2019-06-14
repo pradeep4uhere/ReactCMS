@@ -39,5 +39,7 @@ urlConstant = {
         UPDATE_VIEDO_API                :   config.API_HOST_URL+'/updateviedos',
         GET_VIEDO_API                   :   config.API_HOST_URL+'/getviedos',
         DELETE_VIEDO_API                :   config.API_HOST_URL+'/deleteviedos',
+
+        MEMBERSHIP_PLAN_LIST_API        :   config.API_HOST_URL+'/getmembership',
 }
 module.exports = urlConstant;

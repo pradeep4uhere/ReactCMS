@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from 'axios'
 import { Redirect,withRouter } from 'react-router-dom'
-import FadeIn from 'react-fade-in';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Constants  from '../config/Constants'
-import SweetAlert from 'sweetalert2-react';
 import $ from 'jquery';
+import '../theme/bower_components/bootstrap/dist/css/bootstrap.min.css';
+import Constants  from '../config/Constants'
 var sha1 = require('sha1');
 var globals = require('node-global-storage');
 var cors = require('cors');

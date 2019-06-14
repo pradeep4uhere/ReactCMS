@@ -8,16 +8,17 @@ var fs = require('fs');
 var appRoot = require('app-root-path');
 const request = require('request-promise');
 var urlConstant = require('../module/urlConstant');
-const ADD_SEAT_API          = urlConstant.ADD_SEAT_API;
-const GET_SEAT_API          = urlConstant.GET_SEAT_API;
-const UPDATE_SEAT_API       = urlConstant.UPDATE_SEAT_API;
-const GET_PAGE_LIST_API     = urlConstant.GET_PAGE_LIST_API;
-const GET_PAGE_DETAIL_API   = urlConstant.GET_PAGE_DETAIL_API;
-const UPDATE_PAGE_DETAIL_API= urlConstant.UPDATE_PAGE_DETAIL_API;
+const ADD_SEAT_API              = urlConstant.ADD_SEAT_API;
+const GET_SEAT_API              = urlConstant.GET_SEAT_API;
+const UPDATE_SEAT_API           = urlConstant.UPDATE_SEAT_API;
+const GET_PAGE_LIST_API         = urlConstant.GET_PAGE_LIST_API;
+const GET_PAGE_DETAIL_API       = urlConstant.GET_PAGE_DETAIL_API;
+const UPDATE_PAGE_DETAIL_API    = urlConstant.UPDATE_PAGE_DETAIL_API;
 
-const UPDATE_VIEDO_API      = urlConstant.UPDATE_VIEDO_API;
-const GET_VIEDO_API         = urlConstant.GET_VIEDO_API;
-const DELETE_VIEDO_API      = urlConstant.DELETE_VIEDO_API;
+const UPDATE_VIEDO_API          = urlConstant.UPDATE_VIEDO_API;
+const GET_VIEDO_API             = urlConstant.GET_VIEDO_API;
+const DELETE_VIEDO_API          = urlConstant.DELETE_VIEDO_API;
+const MEMBERSHIP_PLAN_LIST_API  = urlConstant.MEMBERSHIP_PLAN_LIST_API;
 
 
 /**************EVENT List API Start Here**********************************/
@@ -366,6 +367,44 @@ GeneralPortRouter.route('/deleteviedo').post(function (req, res,next) {
 	        console.log(err)
 	})
 });
+
+
+
+
+
+GeneralPortRouter.route('/membershipplanlist').post(function (req, res,next) {
+    var token       = req.body.token;
+    var id          = req.body.id;
+    var postData ={
+            token	    : token,
+            id  	    : id,
+    }
+    const options = {
+        method: 'POST',
+        uri: MEMBERSHIP_PLAN_LIST_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    
+    console.log(postData);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+
+
+
 
 
 

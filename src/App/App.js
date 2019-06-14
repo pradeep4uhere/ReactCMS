@@ -25,7 +25,8 @@ import SittingType    from '../components/SittingType';
 import SittingList    from '../components/SittingList';
 import SittingEdit    from '../components/SittingEdit';
 
-import ViedoList from '../components/ViedoList';
+import ViedoList      from '../components/ViedoList';
+import MembershipList from '../components/MembershipList';
 
 
 import Login, {user} from '../Login/Login';
@@ -75,6 +76,8 @@ render() {
               <Route path="/setting" component={Setting} exact />
               <Route path="/dashboard" component={Dashboard}  />
               <Route path="/memberlist" component={MemberList}  />
+              <Route path="/membership" component={MembershipList}  />
+              
               <Route path="/memberlist/{:page}" component={MemberList}  />
 
               <Route path="/sittingtype" component={SittingType}  />

@@ -1,6 +1,4 @@
 import React from 'react';
-import {Redirect } from 'react-router-dom';
-import $ from 'jquery';
 import Breadcrum from '../BreadcrumPage';
 import OrderList from '../Partials/OrderList';
 import LatestMemberList from '../Partials/LatestMemberList';

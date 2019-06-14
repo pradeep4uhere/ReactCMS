@@ -43,7 +43,7 @@ class LeftSideBar extends React.Component{
                 <span>General Setting</span>
               </a>
             </li>
-
+            <li><a href="membership"><i className="fa fa-bookmark"/>Membership Plan</a></li>
 
             <li className="treeview menu-open">
               <a href="#">
@@ -60,6 +60,8 @@ class LeftSideBar extends React.Component{
                 <li><a href="#"><i className="fa fa-language"/>Language Type</a></li>
               </ul>
             </li>
+            
+            
              <li className="treeview menu-open">
               <a href="#">
                 <i className="fa fa-map" /> <span>Location</span>

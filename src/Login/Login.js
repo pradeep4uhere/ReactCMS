@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios'
 import { Redirect,withRouter } from 'react-router-dom'
-import FadeIn from 'react-fade-in';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Constants  from '../config/Constants'
 import $ from 'jquery';
 var sha1 = require('sha1');

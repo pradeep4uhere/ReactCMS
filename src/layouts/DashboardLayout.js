@@ -24,6 +24,7 @@ import SittingEditPage      from '../components/Page/SittingType/SittingEditPage
 import PageListPage         from '../components/Page/PageListPage';
 import EditPagePage         from '../components/Page/StaticPage/EditPagePage';
 import ViedoListPage        from '../components/Page/ViedoListPage';
+import MembershipListPage   from '../components/Page/MembershipListPage';
 
 
 
@@ -65,7 +66,8 @@ class DashboardLayout extends React.Component{
               'SittingEdit'       : <SittingEditPage id={id}/>,
               'PageList'          : <PageListPage/>,
               'EditPagePage'      : <EditPagePage id={id}/>,
-              'ViedoListPage'     : <ViedoListPage/> 
+              'ViedoListPage'     : <ViedoListPage/>, 
+              'MembershipListPage': <MembershipListPage/>
             }[this.props.component]
           }
           </div>

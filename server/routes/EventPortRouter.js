@@ -262,6 +262,7 @@ EventPortRouter.route('/eventtimingupdate').post(function (req, res,next) {
     var event_start_time= req.body.event_start_time;
     var event_end_time  = req.body.event_end_time;
     var status          = req.body.status;
+    var body            = req.body.body;
 
     var postData ={
             token	        : token,
@@ -270,7 +271,8 @@ EventPortRouter.route('/eventtimingupdate').post(function (req, res,next) {
             theater_id      : theater_id,
             event_start_time: event_start_time,
             event_end_time  : event_end_time,
-            status          : status
+            status          : status,
+            body            : body
     }
     const options = {
             method: 'POST',

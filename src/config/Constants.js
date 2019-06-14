@@ -46,6 +46,8 @@ export const Constants = {
 	VIEDO_UPDATE_URL			: AppUrl+'/general/viedoupdate',
 	VIEDO_DELETE_URL			: AppUrl+'/general/deleteviedo'	,    
 
+	MEMBERSHIP_PLAN_LIST		: AppUrl+'/general/membershipplanlist'	,    
+
 
     IMG							: {
     								USER_PROFILE: '../theme/dist/img/user2-160x160.jpg',	
